@@ -21,28 +21,30 @@ import edu.kis.powp.drawer.panel.DrawPanelController;
 public class TestPlotSoftPatterns
 {
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-		
+
     /**
 	 * Setup test concerning preset figures in context.
-	 * 
+	 *
 	 * @param context Application context.
 	 */
 	private static void setupPresetTests(Context context) {
-	    SelectTestFigureOptionListener selectTestFigureOptionListener = new SelectTestFigureOptionListener();
-		
-		context.addTest("Figure Joe 1", selectTestFigureOptionListener);	        
+	    SelectTestFigureOptionListener selectTestFigureOptionListener = new SelectTestFigureOptionListener(1);
+	    SelectTestFigureOptionListener selectTestFigureOptionListener2 = new SelectTestFigureOptionListener(2);
+
+		context.addTest("Figure Joe 1", selectTestFigureOptionListener);
+		context.addTest("Figure Joe 2", selectTestFigureOptionListener2);
 	}
 
 	/**
 	 * Setup driver manager, and set default IPlotter for application.
-	 * 
+	 *
 	 * @param context Application context.
 	 */
 	private static void setupDrivers(Context context) {
 		IPlotter clientPlotter = new ClientPlotter();
 		context.addDriver("Client Plotter", clientPlotter);
 		Application.getComponent(DriverManager.class).setCurrentPlotter(clientPlotter);
-		
+
 		IPlotter plotter = new DrawerAdapter(Application.getComponent(DrawPanelController.class));
 		context.addDriver("Buggy Simulator", plotter);
 
@@ -51,19 +53,19 @@ public class TestPlotSoftPatterns
 
 	/**
 	 * Auxiliary routines to enable using Buggy Simulator.
-	 * 
+	 *
 	 * @param context Application context.
 	 */
 	private static void setupDefaultDrawerVisibilityManagement(Context context) {
 		DefaultDrawerFrame defaultDrawerWindow = DefaultDrawerFrame.getDefaultDrawerFrame();
-        context.addComponentMenuElementWithCheckBox(DrawPanelController.class, "Default Drawer Visibility", 
+        context.addComponentMenuElementWithCheckBox(DrawPanelController.class, "Default Drawer Visibility",
         		new SelectChangeVisibleOptionListener(defaultDrawerWindow), true);
         defaultDrawerWindow.setVisible(true);
 	}
-	
+
 	/**
 	 * Setup menu for adjusting logging settings.
-	 * 
+	 *
 	 * @param context Application context.
 	 */
 	private static void setupLogger(Context context) {
@@ -76,7 +78,7 @@ public class TestPlotSoftPatterns
 		context.addComponentMenuElement(Logger.class, "Severe level", (ActionEvent e) -> LOGGER.setLevel(Level.SEVERE));
 		context.addComponentMenuElement(Logger.class, "OFF logging", (ActionEvent e) -> LOGGER.setLevel(Level.OFF));
 	}
-		
+
     /**
      * Launch the application.
      */
@@ -88,9 +90,9 @@ public class TestPlotSoftPatterns
             {
                 ApplicationWithDrawer.configureApplication();
                 Context context = Application.getComponent(Context.class);
-                
+
                 setupDefaultDrawerVisibilityManagement(context);
-                
+
             	setupDrivers(context);
             	setupPresetTests(context);
             	setupLogger(context);
