@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class FigureFactory {
+public class Factory {
 
 	public static PlotterCommand drawRectangle(int x, int y, int w, int h) {
 		List<PlotterCommand> commands = new ArrayList<>();
