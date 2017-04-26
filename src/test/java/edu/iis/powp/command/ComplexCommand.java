@@ -4,10 +4,15 @@ import edu.iis.client.plottermagic.IPlotter;
 
 public class ComplexCommand implements PlotterCommand {
 
+	private List<PlotterCommand> commands;
+
+	public ComplexCommand(List<PlotterCommand> commands) {
+		this.commands = commands;
+	}
+
 	@Override
 	public void execute(IPlotter iPlotter) {
-		// TODO Auto-generated method stub
-		
+		commands.forEach(command -> command.execute(iPlotter));
 	}
 
 }
