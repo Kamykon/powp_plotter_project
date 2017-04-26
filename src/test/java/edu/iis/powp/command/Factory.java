@@ -18,4 +18,14 @@ public class Factory {
 		return new ComplexCommand(commands);
 	}
 
+	public static PlotterCommand drawCircle(int x, int y, int r) {
+		List<PlotterCommand> commands = new ArrayList<>();
+
+		commands.add(new CommandSetPosition(x,y + r));
+		for(double i = 0; i < 2 * Math.PI; i+=0.001) {
+			commands.add(new CommandDrawLineToPosition((int)(r * Math.cos(i) + x), (int)(r * Math.sin(i) + y)));
+		}
+		return new ComplexCommand(commands);
+	}
+
 }

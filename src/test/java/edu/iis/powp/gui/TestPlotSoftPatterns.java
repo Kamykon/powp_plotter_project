@@ -36,6 +36,7 @@ public class TestPlotSoftPatterns
 		context.addTest("Figure Joe 1", selectTestFigureOptionListener);
 		context.addTest("Figure Joe 2", selectTestFigureOptionListener2);
 		context.addTest("Rectangle", (a) -> Factory.drawRectangle(0, 0, 10, 20).execute(Application.getComponent(DriverManager.class).getCurrentPlotter()));
+		context.addTest("Circle", (a) -> Factory.drawCircle(20, 20, 10	0).execute(Application.getComponent(DriverManager.class).getCurrentPlotter()));
 	}
 
 	/**
