@@ -17,6 +17,7 @@ import edu.iis.powp.events.predefine.SelectChangeVisibleOptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
 import edu.kis.powp.drawer.panel.DefaultDrawerFrame;
 import edu.kis.powp.drawer.panel.DrawPanelController;
+import edu.iis.powp.command.Factory;
 
 
 public class TestPlotSoftPatterns
@@ -34,6 +35,7 @@ public class TestPlotSoftPatterns
 
 		context.addTest("Figure Joe 1", selectTestFigureOptionListener);
 		context.addTest("Figure Joe 2", selectTestFigureOptionListener2);
+		context.addTest("Rectangle", (a) -> FigureFactory.drawRectangle(0, 0, 10, 20).execute(Application.getComponent(DriverManager.class).getCurrentPlotter()));
 	}
 
 	/**
